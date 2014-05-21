@@ -1,5 +1,5 @@
 - [ ] register.c
-- [ ] login.c
+- [x] login.c
 - [ ] database_connection.c
   - [ ] QueryBuilder
   - [ ] MySQLConnect
