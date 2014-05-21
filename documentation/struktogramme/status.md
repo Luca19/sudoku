@@ -1,0 +1,13 @@
+- [ ] register.c
+- [ ] login.c
+- [ ] database_connection.c
+  - [ ] QueryBuilder
+  - [ ] MySQLConnect
+  - [ ] MySQLClose 
+- [ ] sudoku_gen.c
+  - [ ] generateSudoku
+  - [ ] swap
+  - [ ] solve
+  - [ ] solveRecur
+  - [ ] isFreeNumber
+  
