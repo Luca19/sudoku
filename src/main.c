@@ -5,6 +5,7 @@
 #include "login.h"
 #include "toplist.h"
 #include "sudoku_gen.h"
+#include "view.h"
 
 #define MAIN_MENUE_SIZE 3
 #define GAME_MENUE_SIZE 5
@@ -23,7 +24,6 @@ void LoadGameMenue(ACCOUNT user);
 int main(void)
 {
 	int m_Exit = 0;
-	char mode[50];
 	do
 	{
 	  resizeWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -39,31 +39,26 @@ int main(void)
 
 int LoadMainMenue(void) {
 	int iStatus = 0, iTemp = 1, i, m_Exit=0;
-   char *cMenu[MAIN_MENUE_SIZE] = { "Register        ", "Login           ", "Exit            "};
+   char *cMenu[MAIN_MENUE_SIZE] = { "Register", "Login", "Exit"},highLight[2];
    ACCOUNT user;
-
-   //createBorder();
-	//createBlock(28);
+   
+	sprintf(highLight, "%c", 16);
+	system("cls");
+	createBlockView(WINDOW_WIDTH, 37);
+	createBlockView(WINDOW_WIDTH, 10);
+	loadMainLogo();
+	printTo(((WINDOW_WIDTH-9)/2), 40, "M E N U E");
+	printTo(((WINDOW_WIDTH-9)/2), 41, "= = = = =");
+	for (i = 0; i < MAIN_MENUE_SIZE; i++)
+	{
+			printTo((WINDOW_WIDTH-9)/2, 43+i, cMenu[i]);
+	}
+	printTo(((WINDOW_WIDTH-9)/2)-5, 43, highLight);
+	gotoxy(WINDOW_WIDTH-1,0);
    do
    {
-		system("cls");
-		printf("\t\tM E N U E\n");
-		printf("\t= = = = = = = = = = = = =\n\n");
-
-		for (i = 0; i < MAIN_MENUE_SIZE; i++)
-		{
-			if (i == iTemp-1)
-			{
-				printf("\t%c\t%s%c\n", 16, cMenu[i], 17);
-			}
-			else
-			{
-				printf("\t\t%s\n", cMenu[i]);
-			}
-		}
-
 		iStatus = control();
-
+		printTo(((WINDOW_WIDTH-9)/2)-5, 42+iTemp, " ");
 		if (iStatus == 2) 
 		{
 			if (iTemp > 1) 
@@ -78,6 +73,8 @@ int LoadMainMenue(void) {
 				iTemp++;
 			}
 		}
+		printTo(((WINDOW_WIDTH-9)/2)-5, 42+iTemp, highLight);
+		gotoxy(WINDOW_WIDTH-1,0);
    } while (iStatus != 6);
 
    system("cls");
@@ -111,34 +108,37 @@ int LoadMainMenue(void) {
 
 void LoadGameMenue(ACCOUNT user) {
 	int iStatus = 0, iTemp = 1, iLength = 0, i, m_Exit = 0;
-   char *cMenu[GAME_MENUE_SIZE] = { "Play Sudoku     ", 
-												"How To Play     ", 
-												"Top List        ",
-												"Settings        ",
-												"Exit            "};
+   char *cMenu[GAME_MENUE_SIZE] = { "Play Sudoku", 
+												"How To Play", 
+												"Top List",
+												"Settings",
+												"Log Out"}
+			,highLight[2];
+	
+	sprintf(highLight, "%c", 16);
+
 	if(user.WindowHeight!=0 && user.WindowWidth!=0) {
 	  resizeWindow(user.WindowWidth, user.WindowHeight);
+	} else {
+		user.WindowWidth = WINDOW_WIDTH;
+		user.WindowHeight = WINDOW_HEIGHT;
 	}
 
-   //createBorder();
+	createBlockView(user.WindowWidth, ((user.WindowHeight/3)*2)-4);
+	createBlockView(user.WindowWidth, ((user.WindowHeight/3)*1)+1);
+	printTo(((user.WindowWidth-17)/2), ((user.WindowHeight/3)*2)-2, "G A M E M E N U E");
+	printTo(((user.WindowWidth-17)/2), ((user.WindowHeight/3)*2)-1, "= = = = = = = = =");
+	for (i = 0; i < GAME_MENUE_SIZE; i++)
+	{
+			printTo((user.WindowWidth-17)/2, ((user.WindowHeight/3)*2)+1+i, cMenu[i]);
+	}
+	printTo(((user.WindowWidth-17)/2)-5, ((user.WindowHeight/3)*2)+1, highLight);
+	gotoxy(user.WindowWidth-1,0);
+
    do
    {
-		system("cls");
-		printf("\t\tG A M E M E N U E\n");
-		printf("\t= = = = = = = = = = = = =\n\n");
-		for (i = 0; i < GAME_MENUE_SIZE; i++)
-		{
-			if (i == iTemp-1)
-			{
-				printf("\t%c\t%s%c\n", 16, cMenu[i], 17);
-			}
-			else
-			{
-				printf("\t\t%s\n", cMenu[i]);
-			}
-		}
-
 		iStatus = control();
+		printTo(((user.WindowWidth-17)/2)-5, ((user.WindowHeight/3)*2)+iTemp, " ");
 
 		if (iStatus == 2) 
 		{
@@ -154,11 +154,17 @@ void LoadGameMenue(ACCOUNT user) {
 				iTemp++;
 			}
 		}
+		
+		printTo(((user.WindowWidth-17)/2)-5, ((user.WindowHeight/3)*2)+iTemp, highLight);
+		gotoxy(user.WindowWidth-1,0);
    } while (iStatus != 6);
 
 	switch(iTemp) 
    {
 		case 1:
+			system("cls");
+			createBlockView(user.WindowWidth, 20 );
+			getchar( );
 			//LoadDifficultyMenue();
 		break;
 		case 2:

@@ -25,6 +25,8 @@ int getArraySizeForChar( char *Array );
 int getRowCountSize( MYSQL_ROW ROW );
 int getArraySizeForInt( int *Array );
 void resizeWindow(int width, int height );
+void printTo( int x, int y, char *text);
+int length(char string[]);
 
 int UTIL_ToInt( char input );
 

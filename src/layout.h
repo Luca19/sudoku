@@ -1,6 +1,6 @@
 #ifndef LAYOUT_H
 #define LAYOUT_H
 
-void createBorder();
+void loadMainLogo(void);
 
 #endif /* PRINTING_H */

@@ -11,7 +11,7 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "util.h"
 
 #define HEADER 1
 #define BODY 2
@@ -336,4 +336,36 @@ void zeihleLaenge()
 		printf("\xC4");
 	}
 
+}
+
+void createBlockView( int width, int height )
+{
+    int i=0, n=0;
+	 if(width==0) {
+		 width = WINDOW_WIDTH;
+	 }
+
+	 for(i=0; i<=height; i++) {
+        for(n=0; n<width; n++) {
+            if(i==0 && n==0) {
+                printf("%c", 218);
+            } else if(i==0 && n == (width-1))  {
+                printf("%c", 191);
+            } else if(i==0) {
+                printf("%c", 196);
+            } else if( i != height ) {
+                if(n==0 || n==(width-1))
+                    printf("%c", 179);
+                else
+                    printf(" ");
+            } else if( n==0) {
+                printf("%c", 192);
+            } else if( n==(width-1)) {
+                printf("%c", 217);
+            } else {
+                printf("%c", 196);
+            }
+        }
+    }
+    return;
 }

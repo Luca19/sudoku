@@ -41,3 +41,16 @@ int UTIL_ToInt( char input ) {
 	int a = input - '0';
 	return a;
 }
+
+void printTo( int x, int y, char *text) {
+	gotoxy(x, y);
+	printf("%s", text);
+}
+
+int length(char string[]) {
+    int index;
+
+    for (index = 0; string[index] != '\0'; ++index)
+        continue;
+    return (index);
+}
